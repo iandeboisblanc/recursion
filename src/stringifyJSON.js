@@ -11,7 +11,8 @@ var stringifyJSON = function(obj) {
     return string;
   };
   var resultString = '';
-  if (obj === null) {
+  if (typeof obj === 'function' || typeof obj === 'undefined') {} //do nothing
+  else if (obj === null) {
     resultString += 'null';
   }
   else if (typeof obj === 'number' || typeof obj === 'boolean') {
@@ -32,9 +33,12 @@ var stringifyJSON = function(obj) {
   else {
     resultString += '{';
     for (var item in obj) {
-      resultString += '"' + item + '":'
-      resultString += stringifyJSON(obj[item]);
-      resultString += ',';
+      if (typeof obj[item] === 'function' || typeof obj[item] === 'undefined') {} //do nothing
+      else {
+        resultString += '"' + item + '":'
+        resultString += stringifyJSON(obj[item]);
+        resultString += ',';
+      }
     }
     resultString = removeEndComma(resultString);
     resultString += '}';
