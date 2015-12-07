@@ -14,6 +14,14 @@ var stringifyJSON = function(obj) {
   else if (typeof obj === 'string') {
     resultString += '"' + obj + '"';
   }
-  
+  else if (Array.isArray(obj)) {
+    resultString += '[';
+    for (var i = 0; i < obj.length-1; i++) {
+      resultString += stringifyJSON(obj[i]);
+      resultString += ','
+    }
+    resultString += stringifyJSON(obj[i]);
+    resultString += ']';
+  }
   return resultString;
 };
