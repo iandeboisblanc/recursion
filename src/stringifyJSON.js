@@ -16,12 +16,21 @@ var stringifyJSON = function(obj) {
   }
   else if (Array.isArray(obj)) {
     resultString += '[';
-    for (var i = 0; i < obj.length-1; i++) {
+    for (var i = 0; i < obj.length; i++) {
       resultString += stringifyJSON(obj[i]);
       resultString += ','
     }
-    resultString += stringifyJSON(obj[i]);
+    removeEndComma();
     resultString += ']';
+  }
+  else {
+    resultString += '{';
+    for (var item in obj) {
+      resultString += stringifyJSON(obj[item]);
+      resultString += ',';
+    }
+    removeEndComma();
+    resultString += '}';
   }
   return resultString;
 };
