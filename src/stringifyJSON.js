@@ -4,6 +4,12 @@
 // but you don't so you're going to write it from scratch:
 
 var stringifyJSON = function(obj) {
+  var removeEndComma = function(string) {
+    if (string.substr(string.length - 1) === ',') {
+        string = string.slice(0,-1);
+    }
+    return string;
+  };
   var resultString = '';
   if (obj === null) {
     resultString += 'null';
@@ -20,7 +26,7 @@ var stringifyJSON = function(obj) {
       resultString += stringifyJSON(obj[i]);
       resultString += ','
     }
-    removeEndComma();
+    resultString = removeEndComma(resultString);
     resultString += ']';
   }
   else {
@@ -29,7 +35,7 @@ var stringifyJSON = function(obj) {
       resultString += stringifyJSON(obj[item]);
       resultString += ',';
     }
-    removeEndComma();
+    resultString = removeEndComma(resultString);
     resultString += '}';
   }
   return resultString;
