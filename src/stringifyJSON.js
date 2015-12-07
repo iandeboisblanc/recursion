@@ -32,6 +32,7 @@ var stringifyJSON = function(obj) {
   else {
     resultString += '{';
     for (var item in obj) {
+      resultString += '"' + item + '":'
       resultString += stringifyJSON(obj[item]);
       resultString += ',';
     }
